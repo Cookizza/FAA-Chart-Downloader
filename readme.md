@@ -1,4 +1,4 @@
-#FAA Chart Download Assistant
+# FAA Chart Download Assistant
 Download all FAA charts for North American airports including SID, STAR, IAP & Runway information as high resolution PDF files.
 
 ## Requirements
