@@ -6,7 +6,7 @@ const details = require('./details')
 let airport = '';
 
 const c = new Crawler({
-  maxConnections: 1,
+  maxConnections: 5,
   callback: async function (error, res, done) {
     if (error) {
       console.log(error);
@@ -20,9 +20,12 @@ const c = new Crawler({
             if (err) {
               console.log('failed to create directory', err);
             } else {
-              fs.mkdir("output/" + airport + "/DEPARTURES", function (err) {});
-              fs.mkdir("output/" + airport + "/STAR", function (err) {});
-              fs.mkdir("output/" + airport + "/IAP", function (err) {});
+              fs.mkdir("output/" + airport + "/DEPARTURES", function (err) {
+              });
+              fs.mkdir("output/" + airport + "/STAR", function (err) {
+              });
+              fs.mkdir("output/" + airport + "/IAP", function (err) {
+              });
             }
           });
         }
@@ -40,9 +43,9 @@ const c = new Crawler({
         let item = $(el).children("a");
 
         fetch(item.attr('href')).then(res => {
-          const dest = fs.createWriteStream("output/" + airport + "/STAR/"+item.text().replace('/', '&')+".pdf");
+          const dest = fs.createWriteStream("output/" + airport + "/STAR/" + item.text().replace('/', '&') + ".pdf");
           res.body.pipe(dest);
-          console.log("STAR: "+item.text());
+          console.log("STAR: " + item.text());
         });
 
       });
@@ -51,9 +54,9 @@ const c = new Crawler({
         let item = $(el).children("a");
 
         fetch(item.attr('href')).then(res => {
-          const dest = fs.createWriteStream("output/" + airport + "/DEPARTURES/"+item.text().replace('/', '&')+".pdf");
+          const dest = fs.createWriteStream("output/" + airport + "/DEPARTURES/" + item.text().replace('/', '&') + ".pdf");
           res.body.pipe(dest);
-          console.log("DEPARTURE: "+item.text());
+          console.log("DEPARTURE: " + item.text());
         });
 
       });
@@ -62,9 +65,9 @@ const c = new Crawler({
         let item = $(el).children("a");
 
         fetch(item.attr('href')).then(res => {
-          const dest = fs.createWriteStream("output/" + airport + "/IAP/"+item.text().replace('/', '&')+".pdf");
+          const dest = fs.createWriteStream("output/" + airport + "/IAP/" + item.text().replace('/', '&') + ".pdf");
           res.body.pipe(dest);
-          console.log("IAP: "+item.text());
+          console.log("IAP: " + item.text());
         });
 
       });

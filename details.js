@@ -5,10 +5,12 @@ module.exports= {
     const response = await prompts({
       type: 'text',
       name: 'value',
-      message: 'Enter a code',
-      validate: value => value < 18 ? `Nightclub is 18+ only` : true
+      message: 'Enter an airport code'
     });
 
     return response.value.toUpperCase();
+  },
+  async save() {
+
   }
 };
