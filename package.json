@@ -1,0 +1,16 @@
+{
+  "name": "faa-chart-downloader",
+  "version": "1.0.0",
+  "description": "Automatic download of PDF files from FAA source",
+  "main": "index.js",
+  "scripts": {
+    "go": "node index.js"
+  },
+  "author": "Josh Pine",
+  "license": "ISC",
+  "dependencies": {
+    "crawler": "^1.2.0",
+    "node-fetch": "^2.3.0",
+    "prompts": "^2.0.1"
+  }
+}
