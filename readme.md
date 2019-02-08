@@ -23,3 +23,8 @@ Run the tool
 
 You will then be asked to enter the airport code that you wish to download. 
 Right away, the tool will download all the charts from the FAA and place them in relevant folders inside the `output/` directory.
+
+
+EXAMPLE PDF:
+
+![img](https://i.imgur.com/KVPIBKz.png)
