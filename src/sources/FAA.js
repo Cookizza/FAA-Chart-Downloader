@@ -1,6 +1,7 @@
 const fs = require('fs');
 const fetch = require('node-fetch');
 const chalk = require('chalk');
+const path = require('path');
 const log = console.log;
 
 module.exports = {
@@ -15,11 +16,11 @@ module.exports = {
     return 'https://nfdc.faa.gov/nfdcApps/services/ajv5/airportDisplay.jsp?airportId=' + code;
   },
   async getFile(type, url, name) {
-    fs.access("output/" + this.airport + "/" + type + "/" + name + ".pdf", async err => {
+    fs.access(path.join("output", this.airport,type,name,".pdf"), async err => {
       if (err || this.overwrite) {
         const res = await fetch(url);
         await new Promise((resolve, reject) => {
-          const dest = fs.createWriteStream("output/" + this.airport + "/" + type + "/" + name + ".pdf");
+          const dest = fs.createWriteStream(path.join("output", this.airport,type,name+".pdf"));
           res.body.pipe(dest);
           res.body.on("error", (err) => {
             reject(err);
@@ -40,7 +41,7 @@ module.exports = {
     let diagram = $("#charts .chartLink a").attr('href');
 
     await fetch(diagram).then(res => {
-      const dest = fs.createWriteStream("output/" + this.airport + "/" + this.airport + "_airport-diagram.pdf");
+      const dest = fs.createWriteStream(path.join("output/",this.airport, this.airport + "_airport-diagram.pdf"));
       res.body.pipe(dest);
       log(chalk.cyan("Airport info diagram downloaded"));
     }).catch(err => {

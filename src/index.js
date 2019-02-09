@@ -1,7 +1,7 @@
 const Crawler = require("crawler");
 const chalk = require('chalk');
 const fs = require('fs');
-
+const path = require('path');
 const details = require('./details');
 const FAA = require('./sources/FAA');
 
@@ -31,17 +31,17 @@ async function go() {
           log(chalk.yellow("Try a different source or check your airport code was correct."));
           process.exit();
         } else {
-          await fs.access("output/" + info.source.airport, err => {
+          await fs.access(path.join("output",info.source.airport), err => {
             if (err) {
-              fs.mkdir("output/" + info.source.airport, err => {
+              fs.mkdir(path.join("output",info.source.airport), err => {
                 if (err) {
                   log(chalk.red('failed to create directory'), err);
                 } else {
-                  fs.mkdir("output/" + info.source.airport + "/DEPARTURES", err => {
+                  fs.mkdir(path.join("output",info.source.airport, "DEPARTURES"), err => {
                   });
-                  fs.mkdir("output/" + info.source.airport + "/STAR", err => {
+                  fs.mkdir(path.join("output",info.source.airport, "STAR"), err => {
                   });
-                  fs.mkdir("output/" + info.source.airport + "/IAP", err => {
+                  fs.mkdir(path.join("output",info.source.airport, "IAP"), err => {
                   });
                 }
               });
