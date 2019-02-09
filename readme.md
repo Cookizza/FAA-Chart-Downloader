@@ -26,6 +26,7 @@ Right away, the tool will download all the charts and place them in relevant fol
 
 ![img](https://i.imgur.com/upRZnxy.gif)
 
-EXAMPLE PDF:
+EXAMPLE PDF FILES:
+![img](https://i.imgur.com/HDA61yb.png)
 
 ![img](https://i.imgur.com/KVPIBKz.png)
