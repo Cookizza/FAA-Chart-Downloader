@@ -62,10 +62,6 @@ async function go() {
 
   await c.queue(url);
 
-  // log(chalk.green("DONE!"))
-  // log(chalk.cyan("Files written: ") + chalk.green(info.source.filesWritten));
-  // log(chalk.cyan("Files skipped: ") + chalk.yellow(info.source.filesSkipped));
-
 }
 
 log(chalk.greenBright("======================================"));
