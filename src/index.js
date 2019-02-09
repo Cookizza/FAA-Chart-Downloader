@@ -13,12 +13,6 @@ const sources = [
 
 async function go() {
 
-  log(chalk.greenBright("======================================"));
-  log(chalk.green("AIRPORT AND AIRWAY CHART DOWNLOADER"));
-  log(chalk.cyan("Keep up to date and get new sources on Github"));
-  log(chalk.yellow("http://github.com/cookizza/faa-chart-downloader"));
-  log(chalk.greenBright("======================================"));
-
   let info = await details.get(sources);
 
   let c = new Crawler({
@@ -26,29 +20,35 @@ async function go() {
     rateLimit: 1,
     callback: async (error, res, done) => {
       if (error) {
-        log(chalk.red(error));
-      } else {
+        log(chalk.red("Crawler error!"), error)
+      }
+      else {
 
         let $ = res.$;
 
-        await fs.access("output/" + info.source.airport, function (err) {
-          if (err) {
-            fs.mkdir("output/" + info.source.airport, function (err) {
-              if (err) {
-                log(chalk.red('failed to create directory'), err);
-              } else {
-                fs.mkdir("output/" + info.source.airport + "/DEPARTURES", function (err) {
-                });
-                fs.mkdir("output/" + info.source.airport + "/STAR", function (err) {
-                });
-                fs.mkdir("output/" + info.source.airport + "/IAP", function (err) {
-                });
-              }
-            });
-          }
-        });
+        if($(info.source.errorSelector).length){
+          log(chalk.red("Airport not found"));
+          process.exit();
+        }else{
+          await fs.access("output/" + info.source.airport, function (err) {
+            if (err) {
+              fs.mkdir("output/" + info.source.airport, function (err) {
+                if (err) {
+                  log(chalk.red('failed to create directory'), err);
+                } else {
+                  fs.mkdir("output/" + info.source.airport + "/DEPARTURES", function (err) {
+                  });
+                  fs.mkdir("output/" + info.source.airport + "/STAR", function (err) {
+                  });
+                  fs.mkdir("output/" + info.source.airport + "/IAP", function (err) {
+                  });
+                }
+              });
+            }
+          });
 
-        await info.source.callback($);
+          await info.source.callback($);
+        }
 
         done();
       }
@@ -67,4 +67,9 @@ async function go() {
 
 }
 
+log(chalk.greenBright("======================================"));
+log(chalk.green("AIRPORT AND AIRWAY CHART DOWNLOADER"));
+log(chalk.cyan("Keep up to date and get new sources on Github"));
+log(chalk.yellow("http://github.com/cookizza/faa-chart-downloader"));
+log(chalk.greenBright("======================================"));
 go();
