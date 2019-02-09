@@ -15,15 +15,20 @@ module.exports = {
     return 'https://nfdc.faa.gov/nfdcApps/services/ajv5/airportDisplay.jsp?airportId=' + code;
   },
   async getFile(type, url, name) {
-    await fs.access("output/" + this.airport + "/" + type + "/" + name + ".pdf", err => {
+    fs.access("output/" + this.airport + "/" + type + "/" + name + ".pdf", async err => {
       if (err || this.overwrite) {
-        fetch(url).then(res => {
+        const res = await fetch(url);
+        await new Promise((resolve, reject) => {
           const dest = fs.createWriteStream("output/" + this.airport + "/" + type + "/" + name + ".pdf");
           res.body.pipe(dest);
-          log(chalk.green(type) + ": " + chalk.yellow(name));
-          this.filesWritten++;
-        }).catch(err => {
-          log(chalk.red("Error downloading file."), err);
+          res.body.on("error", (err) => {
+            reject(err);
+          });
+          dest.on("finish", function() {
+            log(chalk.green(type) + ": " + chalk.yellow(name));
+            this.filesWritten++;
+            resolve();
+          });
         });
       } else {
         this.filesSkipped++;
@@ -52,7 +57,7 @@ module.exports = {
       await this.getFile('DEPARTURES', item.attr('href'), item.text().replace('/', '&'));
     });
 
-    await $("#charts h3:contains('Instrument Approach Procedure (IAP) Charts')").parent().children("span").each(async(e, el) => {
+    await $("#charts h3:contains('Instrument Approach Procedure (IAP) Charts')").parent().children("span").each(async (e, el) => {
       let item = $(el).children("a");
       await this.getFile('IAP', item.attr('href'), item.text().replace('/', '&'));
     });

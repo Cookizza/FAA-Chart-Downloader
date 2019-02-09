@@ -26,21 +26,22 @@ async function go() {
 
         let $ = res.$;
 
-        if($(info.source.errorSelector).length){
-          log(chalk.red("Airport not found"));
+        if ($(info.source.errorSelector).length) {
+          log(chalk.red("Airport not found in this source."));
+          log(chalk.yellow("Try a different source or check your airport code was correct."));
           process.exit();
-        }else{
-          await fs.access("output/" + info.source.airport, function (err) {
+        } else {
+          await fs.access("output/" + info.source.airport, err => {
             if (err) {
-              fs.mkdir("output/" + info.source.airport, function (err) {
+              fs.mkdir("output/" + info.source.airport, err => {
                 if (err) {
                   log(chalk.red('failed to create directory'), err);
                 } else {
-                  fs.mkdir("output/" + info.source.airport + "/DEPARTURES", function (err) {
+                  fs.mkdir("output/" + info.source.airport + "/DEPARTURES", err => {
                   });
-                  fs.mkdir("output/" + info.source.airport + "/STAR", function (err) {
+                  fs.mkdir("output/" + info.source.airport + "/STAR", err => {
                   });
-                  fs.mkdir("output/" + info.source.airport + "/IAP", function (err) {
+                  fs.mkdir("output/" + info.source.airport + "/IAP", err => {
                   });
                 }
               });
