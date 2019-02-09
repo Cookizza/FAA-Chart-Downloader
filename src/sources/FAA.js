@@ -27,6 +27,7 @@ module.exports = {
           });
           dest.on("finish", function () {
             log(chalk.green(type) + ": " + chalk.yellow(name));
+            dest.close();
             this.filesWritten++;
             resolve();
           });
@@ -63,9 +64,9 @@ module.exports = {
         this.getFile('IAP', item.attr('href'), item.text().replace('/', '&'));
     });
 
-    await log(chalk.green("DONE!"))
-    log(chalk.cyan("Files written: ") + chalk.green(this.filesWritten));
-    log(chalk.cyan("Files skipped: ") + chalk.yellow(this.filesSkipped));
+    // await log(chalk.green("DONE!"))
+    // log(chalk.cyan("Files written: ") + chalk.green(this.filesWritten));
+    // log(chalk.cyan("Files skipped: ") + chalk.yellow(this.filesSkipped));
 
   }
 };
