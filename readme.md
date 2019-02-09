@@ -1,4 +1,4 @@
-# FAA Chart Download Assistant
+# Airport & Airway Chart Download Assistant
 Download all SID, STAR, DEPARTURE & INFORMATION charts for airports and routes as high resolution PDF files. Currently FAA only (north america).
 
 ## Requirements
