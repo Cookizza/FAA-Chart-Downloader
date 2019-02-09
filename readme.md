@@ -1,5 +1,5 @@
 # FAA Chart Download Assistant
-Download all FAA charts for North American airports including SID, STAR, IAP & Runway information as high resolution PDF files.
+Download all SID, STAR, DEPARTURE & INFORMATION charts for airports and routes as high resolution PDF files. Currently FAA only (north america).
 
 ## Requirements
 
@@ -21,9 +21,10 @@ Run the tool
 
 `npm run go`
 
-You will then be asked to enter the airport code that you wish to download. 
-Right away, the tool will download all the charts from the FAA and place them in relevant folders inside the `output/` directory.
+You will then be asked to selec a chart source and to enter the airport code that you wish to download. 
+Right away, the tool will download all the charts and place them in relevant folders inside the `output/` directory.
 
+![img](https://i.imgur.com/upRZnxy.gif)
 
 EXAMPLE PDF:
 
