@@ -21,7 +21,7 @@ Run the tool
 
 `npm run go`
 
-You will then be asked to selec a chart source and to enter the airport code that you wish to download. 
+You will then be asked to select a chart source and to enter the airport code that you wish to download. 
 Right away, the tool will download all the charts and place them in relevant folders inside the `output/` directory.
 
 ![img](https://i.imgur.com/upRZnxy.gif)
