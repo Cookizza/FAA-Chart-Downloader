@@ -20,12 +20,12 @@ module.exports = {
         name: 'overwrite',
         message: 'Overwrite if file exists?',
         choices: [
-          {title: 'yes', value: true},
-          {title: 'no', value: false},
+          { title: 'yes', value: true },
+          { title: 'no', value: false },
         ]
       }
     ]);
 
-    return {source: res.source, code: res.code.toUpperCase(), overwrite: res.overwrite};
+    return { source: res.source, code: res.code.toUpperCase(), overwrite: res.overwrite };
   }
 };

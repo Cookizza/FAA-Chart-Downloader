@@ -8,7 +8,7 @@ const FAA = require('./sources/FAA');
 const log = console.log;
 
 const sources = [
-  {title: 'North America / Caribbean (faa.gov)', value: FAA}
+  { title: 'North America / Caribbean (faa.gov)', value: FAA }
 ];
 
 async function go() {
@@ -21,8 +21,7 @@ async function go() {
     callback: async (error, res, done) => {
       if (error) {
         log(chalk.red("Crawler error!"), error)
-      }
-      else {
+      } else {
 
         let $ = res.$;
 
@@ -31,17 +30,17 @@ async function go() {
           log(chalk.yellow("Try a different source or check your airport code was correct."));
           process.exit();
         } else {
-          await fs.access(path.join("output",info.source.airport), err => {
+          await fs.access(path.join("output", info.source.airport), err => {
             if (err) {
-              fs.mkdir(path.join("output",info.source.airport), err => {
+              fs.mkdir(path.join("output", info.source.airport), err => {
                 if (err) {
                   log(chalk.red('failed to create directory'), err);
                 } else {
-                  fs.mkdir(path.join("output",info.source.airport, "DEPARTURES"), err => {
+                  fs.mkdir(path.join("output", info.source.airport, "DEPARTURES"), err => {
                   });
-                  fs.mkdir(path.join("output",info.source.airport, "STAR"), err => {
+                  fs.mkdir(path.join("output", info.source.airport, "STAR"), err => {
                   });
-                  fs.mkdir(path.join("output",info.source.airport, "IAP"), err => {
+                  fs.mkdir(path.join("output", info.source.airport, "IAP"), err => {
                   });
                 }
               });
